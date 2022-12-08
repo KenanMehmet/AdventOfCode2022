@@ -7,5 +7,6 @@ def findTopThree(file):
             count += int(line.strip())
         else:
             sums.append(count)
+            count = 0
     sums.sort(reverse=True)
     return sum(sums[0:3])
