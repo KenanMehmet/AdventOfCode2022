@@ -11,9 +11,12 @@ def splitGroups(file):
 
 
 def findBadge(group):
-    print(group)
     group.sort(key=len)
-    print(group)
-    for elf in group:
-        print(len(elf))
+    for char in group[0]:
+        if char in group[1] and char in group[2]:
+            return getCharValue(char)
 
+def getCharValue(char):
+    if char.islower():
+        return ord(char) - 96
+    return ord(char) - 38
