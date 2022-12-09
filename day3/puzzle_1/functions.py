@@ -1,9 +1,16 @@
 
 def findRepeat(file):
+    repeats_value = 0
     for line in file:
-        print(len(line))
-
+        half_point = int(len(line.strip()) / 2)
+        first_compartment = line[0:half_point]
+        second_compartment = line[half_point:]
+        for char in first_compartment:
+            if char in second_compartment:
+                repeats_value += getCharValue(char)
+    return repeats_value
 
 def getCharValue(char):
-    char.swapcase()
+    if char.islower():
+        return ord(char) - 70
     return ord(char) - 64
