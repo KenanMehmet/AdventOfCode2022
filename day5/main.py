@@ -5,12 +5,12 @@ def runCraneOperations(file):
     stacks = []
     stacks_made = False
     for line in file.readlines():
-        print(stacks)
         if not stacks_made:
             stacks, stacks_made = createStacksArray(stacks, line)
         else:
             moveCrates(line, stacks)
-    print(stacks)
+    top_crates = [stack[-1][1] for stack in stacks]
+    return ''.join(top_crates)
 
 
 def moveCrates(line, stacks):
@@ -36,7 +36,6 @@ def createStacksArray(stacks, line):
         if line_splited[i][0] == "[":
             stacks[i].append(line_splited[i])
     return [stacks, False]
-
 
 if __name__ == "__main__":
     """ 
