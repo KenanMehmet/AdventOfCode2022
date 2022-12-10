@@ -1,16 +1,16 @@
 from pathlib import Path
 
 def detectMarker(file):
-    unique_chars = set()
+    unique_chars = []
     read = file.read()
     chars = 0
     for char in read:
-        print(char)
         chars += 1
-        if char not in unique_chars:
-            unique_chars.add(char)
-            if len(unique_chars) == 4:
+        unique_chars.append(char)
+        if len(unique_chars) == 4:
+            if len(set(unique_chars)) == len(unique_chars):
                 return chars
+            unique_chars.pop(0)
 
 
 if __name__ == "__main__":
