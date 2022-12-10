@@ -42,10 +42,9 @@ def moveAllCrates(line, stacks):
     line = line.split()
     origin_stack = stacks[int(line[3]) - 1]
     new_stack = stacks[int(line[5]) - 1]
-    crates = origin_stack[-int(line[1]):]
-    print(crates)
-    for i in range(int(line[1])):
-        new_stack.append(origin_stack[-1])
+    crates = origin_stack[-(int(line[1])):]
+    for crate in crates:
+        new_stack.append(crate)
         origin_stack.pop()
 
 if __name__ == "__main__":
@@ -57,6 +56,6 @@ if __name__ == "__main__":
 
         Puzzle 2: The Crane moves all crates in one go, update code accordingly
     """
-    file = Path(__file__).with_name('puzzle test.txt')
+    file = Path(__file__).with_name('puzzle input.txt')
     with file.open('r') as f:
         print(runCraneOperations(f))
