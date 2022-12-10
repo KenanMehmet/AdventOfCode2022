@@ -5,8 +5,9 @@ def runCraneOperations(file):
     stacks = []
     stacks_made = False
     for line in file.readlines():
+        print(stacks)
         if not stacks_made:
-            stacks_made = createStacksArray(stacks, line)
+            stacks, stacks_made = createStacksArray(stacks, line)
         else:
             moveCrates(line, stacks)
     print(stacks)
@@ -23,12 +24,18 @@ def moveCrates(line, stacks):
 
 def createStacksArray(stacks, line):
     """In the text file, the crates stacks are seperated by an empty line"""
-    if not line.strip():
-        stacks = [stack.reverse() for stack in stacks]
-        return True
+    if len(line.strip()) == 0:
+        for stack in stacks:
+            stack.reverse()
+        return [stacks, True]
     line = line[0:-1] #Cull the /n but keep the spaces
-    stacks.append([line[n: n + 4] for n in range(0, len(line), 4)])
-    return True
+    line_splited = [line[n: n + 4] for n in range(0, len(line), 4)]
+    if len(stacks) == 0:
+        stacks = [[] for i in range(len(line_splited))]
+    for i in range(len(line_splited)):
+        if line_splited[i][0] == "[":
+            stacks[i].append(line_splited[i])
+    return [stacks, False]
 
 
 if __name__ == "__main__":
